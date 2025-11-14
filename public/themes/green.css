@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+body, .Dash, .profile-text, .playlist-name, .scroll-section, .bio-accordion, .cyberpunk-button {
+  font-family: 'Orbitron', sans-serif;
+}
+
+body {
+  background: linear-gradient(120deg, #002e00, #004d00);
+  font-family: 'Orbitron', sans-serif;
+  color: #00ff7f; /* bright green */
+}
+
+.Dash {
+  padding: 1rem;
+}
+
+/* Profile */
+.top-section .profile-pic {
+  border: 2px solid #00ff7f;
+  box-shadow: 0 0 15px #00ff7f;
+  font-family: 'Orbitron',sans-serif;
+}
+
+.profile-text {
+  color: #00ff7f;
+  font-family:  'Orbitron';
+  font-size: xx-large;
+  text-shadow: 0 0 5px #00ff7f;
+}
+
+.playlist-name{
+    font-family: 'Orbitron';
+    font-weight: bolder;
+    font-variant: initial;
+    font-size: xx-large;
+
+}
+/* Accordion */
+.bio-accordion .accordion-button {
+  background: rgba(0,50,0,0.3);
+  color: #00ff7f;
+}
+.bio-accordion .accordion-body {
+  background: rgba(0,40,0,0.2);
+  color: #fff;
+}
+
+/* Scrollable playlist */
+.scroll-section {
+  max-height: 65vh;
+  overflow-y: auto;
+  padding: 1rem;
+  border-radius: 15px;
+  backdrop-filter: blur(6px);
+  background: rgba(0,50,0,0.4);
+}
+
+/* Scrollbar */
+.scroll-section::-webkit-scrollbar {
+  width: 10px;
+}
+.scroll-section::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00ff7f, #00cc5c);
+  border-radius: 10px;
+  box-shadow: 0 0 8px #00ff7f;
+}
+
+/* Cards */
+.border-glow {
+  border: 1px solid rgba(0,255,127,0.1);
+  box-shadow: 0 0 10px rgba(0,255,127,0.3);
+  transition: 0.2s;
+}
+.border-glow:hover {
+  box-shadow: 0 0 25px rgba(0,255,127,0.5);
+}
+
+/* Buttons */
+.cyberpunk-button {
+  background: linear-gradient(90deg, #00ff7f, #00cc5c);
+  color: #fff;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 0 15px #00ff7f;
+  transition: 0.3s ease;
+}
+.cyberpunk-button:hover {
+  box-shadow: 0 0 30px #00cc5c;
+  transform: scale(1.05);
+}

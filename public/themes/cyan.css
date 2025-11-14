@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+body, .Dash, .profile-text, .playlist-name, .scroll-section, .bio-accordion, .cyberpunk-button {
+  font-family: 'Orbitron', sans-serif;
+}
+
+body {
+  background: linear-gradient(120deg, #001f2e, #00334d);
+  font-family: 'Orbitron', sans-serif;
+  color: #00f0ff;
+}
+
+.Dash {
+  padding: 1rem;
+}
+
+.playlist-name{
+  font-family: 'Orbitron';
+  font-size: xx-large;
+  font-style: italic;
+}
+.top-section .profile-pic {
+  border: 2px solid #00f0ff;
+  box-shadow: 0 0 15px #00ffff;
+}
+
+.profile-text {
+  color: #00f0ff;
+  text-shadow: 0 0 5px #00ffff;
+  font-family: 'Orbitron';
+  font-size: xx-large;
+}
+
+.bio-accordion .accordion-button {
+  background: rgba(0,30,50,0.3);
+  color: #00f0ff;
+}
+.bio-accordion .accordion-body {
+  background: rgba(0,20,40,0.2);
+  color: #fff;
+}
+
+.scroll-section {
+  max-height: 65vh;
+  overflow-y: auto;
+  padding: 1rem;
+  border-radius: 15px;
+  backdrop-filter: blur(6px);
+  background: rgba(0,20,50,0.4);
+}
+
+.scroll-section::-webkit-scrollbar {
+  width: 10px;
+}
+.scroll-section::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00ffff, #00a0ff);
+  border-radius: 10px;
+  box-shadow: 0 0 8px #00ffff;
+}
+
+.border-glow {
+  border: 1px solid rgba(0,255,255,0.1);
+  box-shadow: 0 0 10px rgba(0,255,255,0.3);
+  transition: 0.2s;
+}
+.border-glow:hover {
+  box-shadow: 0 0 25px #00ffff;
+}
+
+.cyberpunk-button {
+  background: linear-gradient(90deg, #00ffff, #00a0ff);
+  color: #fff;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 0 15px #00ffff;
+  transition: 0.3s ease;
+}
+.cyberpunk-button:hover {
+  box-shadow: 0 0 30px #00a0ff;
+  transform: scale(1.05);
+}

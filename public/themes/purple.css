@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+body, .Dash, .profile-text, .playlist-name, .scroll-section, .bio-accordion, .cyberpunk-button {
+  font-family: 'Orbitron', sans-serif;
+}
+
+body {
+  background: linear-gradient(120deg, #1a0b2c, #2a0f45);
+  color: #e7d4ff;
+}
+
+.profile-pic {
+  border: 2px solid #d79aff;
+  box-shadow: 0 0 15px #b56bff;
+}
+
+.profile-text {
+  font-size: 2rem;
+  color: #e7d4ff;
+  text-shadow: 0 0 8px #b56bff;
+}
+
+.playlist-name {
+  font-size: 1.5rem;
+  color: #b56bff;
+  font-weight: 500;
+  text-shadow: 0 0 5px #b56bff;
+}
+
+/* Playlist cards */
+.playlist-card {
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 10px rgba(157,0,255,0.3);
+  transition: 0.2s;
+}
+.playlist-card:hover {
+  box-shadow: 0 0 25px rgba(0,240,255,0.5);
+}
+
+/* Scrollable playlist */
+.scroll-section {
+  max-height: 65vh;
+  overflow-y: auto;
+  padding: 1rem;
+  border-radius: 15px;
+  backdrop-filter: blur(6px);
+  background: rgba(30,0,50,0.4);
+}
+.scroll-section::-webkit-scrollbar {
+  width: 10px;
+}
+.scroll-section::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #b56bff, #d79aff);
+  border-radius: 10px;
+  box-shadow: 0 0 8px #b56bff;
+}
+
+
+.scroll-section-app {
+  max-height: 700vh;
+  /* overflow-y: auto; */
+  padding: 1rem;
+  border-radius: 15px;
+  backdrop-filter: blur(6px);
+  background: rgba(30,0,50,0.4);
+  width:100%;
+}
+
+.scroll-section-app::-webkit-scrollbar {
+  width: 10px;
+}
+.scroll-section-app::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #b56bff, #d79aff);
+  border-radius: 10px;
+  box-shadow: 0 0 8px #b56bff;
+}
+.scroll-section-app::-webkit-scrollbar {
+  width: 10px;
+}
+.scroll-section::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #b56bff, #d79aff);
+  border-radius: 10px;
+  box-shadow: 0 0 8px #b56bff;
+}
+
+/* Cyberpunk buttons */
+.cyberpunk-button {
+  background: linear-gradient(90deg, #9d00ff, #00f0ff);
+  color: #fff;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0 15px #9d00ff;
+  transition: 0.3s ease;
+}
+.cyberpunk-button:hover {
+  box-shadow: 0 0 30px #00f0ff;
+  transform: scale(1.05);
+}
+/* Scrollable playlist */
+.scroll-section {
+  max-height: 65vh;            /* limit height for scrolling */
+  overflow-y: auto;            /* vertical scroll */
+  padding: 1rem;
+  border-radius: 15px;
+  backdrop-filter: blur(6px);
+  background: rgba(0,50,0,0.4);
+}
+
+/* Big futuristic scrollbar */
+.scroll-section::-webkit-scrollbar {
+  width: 16px;                 /* bigger scrollbar */
+  border-radius: 10px;
+  background: rgba(0,50,0,0.2);
+}
+
+.scroll-section::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00ff7f, #00cc5c);
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ff7f;
+}
+
+.scroll-section::-webkit-scrollbar-track {
+  background: rgba(0,50,0,0.1);
+  border-radius: 10px;
+}
+
+

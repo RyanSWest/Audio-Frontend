@@ -1,0 +1,484 @@
+/* -----------------------------
+   PAGE BACKGROUND
+------------------------------ */
+ 
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 6rem; /* adjust to match your navbar height */
+  background: linear-gradient(to bottom, #0c0018, #110121);
+  font-family: 'Arial', sans-serif;
+}
+
+/* -----------------------------
+   CENTERED FORM WRAPPER
+------------------------------ */
+.login-wrapper {
+  background: rgba(0,0,0,0.85);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: clamp(0.75rem, 2vw, 1rem);
+  box-shadow: 0 0 30px rgba(255,0,200,0.5);
+  max-width: clamp(300px, 80%, 400px);
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* -----------------------------
+   HEADINGS
+------------------------------ */
+.login-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: transparent;
+  -webkit-text-stroke: 2px #ff00c8; /* pink outline */
+  text-shadow: 0 0 8px #ff00c8, 0 0 16px #ff00c8, 0 0 32px #ff00c8;
+  margin-bottom: clamp(0.5rem, 1.5vw, 0.75rem);
+  text-align: center;
+  align-self: top;
+}
+
+.terms-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  color: #00eaff;
+  font-weight: 600;
+  cursor: pointer;
+  background: none;
+  border: 2px solid cyan;
+  border-radius: clamp(15px, 4vw, 25px);
+  padding: clamp(0.25rem, 1vw, 1rem);
+  margin-bottom: 1rem;
+}
+.terms-section{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  margin-bottom:clamp(1rem,4vw,2rem);
+}
+.login-subtitle {
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  color: #ffffffaa;
+  margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+  text-align: center;
+}
+
+/* -----------------------------
+   HERO SECTION
+------------------------------ */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-img {
+  height: clamp(200px, 40vw, 420px);
+  object-fit: cover;
+  filter: brightness(45%) saturate(110%);
+}
+
+.profile-pic{
+
+  height:7rem;
+  width:7rem;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #ff00c8;
+}
+/* Dark gradient overlay */
+.overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(20, 10, 40, 0.75) 0%,
+    rgba(15, 10, 30, 0.85) 40%,
+    rgba(5, 5, 25, 0.95) 100%
+  );
+  box-shadow: inset 0 0 80px rgba(88, 28, 135, 0.45);
+  z-index: 1;
+}
+
+/* Centered text overlay */
+.hero-text {
+  z-index: 2;
+  max-width: clamp(250px, 80%, 800px);
+  background: linear-gradient(
+    135deg,
+    rgba(111, 45, 168, 0.25),
+    rgba(0, 0, 0, 0.6)
+  );
+  padding: clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 4vw, 2rem);
+  border-radius: clamp(8px, 2vw, 12px);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(147, 51, 234, 0.25);
+  box-shadow: 0 0 20px rgba(88, 28, 135, 0.3);
+}
+
+.profile-text{
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  color: #e5e7eb;
+  padding: 2rem;
+}
+
+.hero-text h2 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  color: #c084fc; /* soft neon purple */
+}
+.up-sec{
+  display:flex;
+  flex-direction:column;
+  justify-content:center ;
+  align-items:center;
+  align-content: space-between;
+  border:2px solid;
+  border-color: #c084fc;
+  border-radius: 25px;;
+
+}
+
+.hero-text p {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  color: #e5e7eb;
+}
+.top{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:row;
+  justify-items: space-between ;
+  margin-top: 4rem;
+  margin-bottom:clamp(1rem,4vw,2rem);
+  border:2px solid;
+  border-color: #c084fc;
+  padding:clamp(1rem,3vw,2rem);
+  border-radius: clamp(8px, 2vw, 12px);
+  box-shadow: #c084fc, 0 0 20px rgba(88, 28, 135, 0.3)  ;
+}
+
+.user{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: space-between;
+  padding: 3rem;
+}
+
+.playlist-name{ 
+  font-family: 'Orbitron';
+  font-size: xx-large;
+  font-style: italic;
+  padding : 3rem;
+}
+
+/* -----------------------------
+   ERROR MESSAGES
+------------------------------ */
+.login-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: clamp(0.5rem, 1vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
+  margin-bottom: clamp(0.5rem, 1vw, 1rem);
+  background: rgba(255,0,0,0.1);
+  border: 1px solid #ff0000;
+  border-radius: clamp(4px, 1vw, 0.5rem);
+  color: #ff6666;
+}
+
+/* -----------------------------
+   FORM INPUTS
+------------------------------ */
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 2vw, 1rem);
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: clamp(0.25rem, 1vw, 0.25rem);
+  font-weight: 600;
+  color: #ffffffcc;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+.input-group input {
+  width: 100%;
+  padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
+  border-radius: clamp(0.5rem, 2vw, 0.75rem);
+  border: 1px solid #ff00c8;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  outline: none;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  transition: all 0.2s ease;
+}
+
+.input-group input:focus {
+  border-color: #00eaff;
+  box-shadow: 0 0 10px #00eaff;
+}
+.sec2{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:clamp(1rem,4vw,2rem);
+}
+
+/* -----------------------------
+   BUTTON
+------------------------------ */
+.cyberpunk-button {
+  margin-top: clamp(0.5rem, 2vw, 1rem);
+  padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
+  font-size: clamp(1rem, 3vw, 1.1rem);
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #ff00c8, #ff69b4);
+  border: 2px solid #ff00c8;
+  border-radius: clamp(0.75rem, 2vw, 1rem);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px #ff00c8, 0 0 20px #ff69b4;
+}
+.form{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem;
+  margin-top:1rem;
+  align-items: space-between;
+  margin-right: 1rem;
+}
+.form-sec{
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+  align-content: space-evenly;
+}
+.form input{
+  margin-bottom:1rem;}
+.cyberpunk-button:hover {
+  box-shadow: 0 0 20px #ff00c8, 0 0 40px #ff69b4;
+  transform: scale(1.02);
+}
+
+.cyberpunk-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* -----------------------------
+   FOOTER LINKS
+------------------------------ */
+.login-footer {
+  margin-top: clamp(1rem, 4vw, 1.5rem);
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  color: #aaa;
+  text-align: center;
+}
+
+.register-link {
+  color: #00eaff;
+  font-weight: 600;
+  cursor: pointer;
+  background: none;
+  border: 2px solid cyan;
+  border-radius: clamp(15px, 4vw, 25px);
+  padding: clamp(0.5rem, 2vw, 2rem);
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+.dontFuckup{
+  margin-right:7rem;
+
+}
+
+/* -----------------------------
+   GENERAL RESPONSIVE ELEMENTS
+------------------------------ */
+.thing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: clamp(1rem, 5vw, 2rem);
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+  opacity: 0.5;
+}
+
+.transp {
+  position: absolute;
+  font-size: clamp(0.6rem, 2vw, 1rem);
+  font-family: 'Rajdhani', sans-serif;
+  color: white;
+  width: fit-content;
+  height: fit-content;
+}
+
+.spani {
+  font-family:'Rajdhani';
+  padding: clamp(1rem, 4vw, 2.5rem);
+  font-style: italic;  
+  font-size: clamp(1rem, 4vw, x-large); 
+  color:white;
+  padding-bottom: clamp(1rem, 4vw, 4rem);
+}
+
+/* -----------------------------
+   CENTERED FORM WRAPPER
+------------------------------ */
+.login-wrapper {
+  background: rgba(0,0,0,0.85);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: clamp(0.75rem, 2vw, 1rem);
+  box-shadow: 0 0 30px rgba(255,0,200,0.5);
+  max-width: clamp(300px, 90%, 400px);
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+/* Expand horizontally for larger screens (tablet & up) */
+@media (min-width: 1024px) {
+  .login-wrapper {
+    flex-direction: row;       /* horizontal layout */
+    justify-content: space-around; /* space between form & possible image */
+    max-width: 80%;           /* wider wrapper */
+    padding: clamp(2rem, 4vw, 3rem);
+  }
+
+  /* Optional: make input fields take more horizontal space */
+  .login-form {
+    width: 50%; /* half the wrapper width */
+  }
+
+  /* Optional: push title & subtitle beside form */
+  .login-title, .login-subtitle {
+    text-align: left;
+    width: 45%;
+  }
+}
+/* -----------------------------
+   ANIMATIONS   
+
+   /* Layout grid: top and bottom halves */
+.dash-grid {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  padding: 1rem;
+  gap: 1rem;
+  background: linear-gradient(180deg, #0b0f1a, #131a28);
+  color: #e6eef8;
+}
+
+/* Top stays fixed height, scroll only bottom */
+.dash-top {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  padding: 1.2rem;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Bottom half scrolls internally */
+.dash-bottom {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.playlist-scroll {
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar styling */
+.playlist-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+.playlist-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+}
+.playlist-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Buttons and extras */
+.cyberpunk-button {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: linear-gradient(90deg,#00f5d4,#00bbf9);
+  color: #0b0f1a;
+  margin-bottom: 2rem;
+}
+
+.profile-pic {
+  border: 2px solid #00bbf9;
+  box-shadow: 0 0 12px rgba(0, 187, 249, 0.4);
+}
+
+.sec{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content:center;
+}
+
+/* Full-page scrollable container */
+/* Full-page scrollable container */
+.full-scroll-container {
+  width: 100vw;            /* full width */
+  min-height: 100vh;       /* full viewport height */
+  overflow-y: auto;        /* vertical scroll */
+  background-color: #001a00; /* plain dark green background */
+  scroll-behavior: smooth; /* smooth scrolling */
+  padding: 2rem;
+}
+
+/* Webkit browsers: Chrome, Edge, Safari */
+.full-scroll-container::-webkit-scrollbar {
+  width: 30px; /* EXTRA LARGE thumb */
+  background: rgba(0,0,0,0.2);
+  border-radius: 15px;
+}
+
+.full-scroll-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #2ba6af, #4e2b51);
+  border-radius: 15px;
+  box-shadow: 0 0 15px #00ff7f;
+}
+
+.full-scroll-container::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+  border-radius: 15px;
+}
+
+/* Firefox */
+.full-scroll-container {
+  scrollbar-width: thin; /* can't do huge in Firefox easily */
+  scrollbar-color: #575e6d rgba(0,0,0,0.1)
+}
