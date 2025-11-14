@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.futuristic-navbar {
+  background: rgba(10, 10, 20, 0.85);
+  border: 2px solid #9b59b6;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #9b59b6;
+  backdrop-filter: blur(6px);
+  font-family: 'Orbitron', sans-serif;
+
+  animation: glowPulse 2s infinite alternate;
+}
+
+.futuristic-brand {
+  color: #fff;
+  text-shadow: 0 0 8px #9b59b6, 0 0 16px #8e44ad;
+  font-weight: 700;
+  animation: textGlowPulse 2s infinite alternate;
+}
+
+.futuristic-link {
+  color: #fff;
+  text-shadow: 0 0 4px #9b59b6;
+  margin-right: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.futuristic-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: #9b59b6;
+  box-shadow: 0 0 6px #9b59b6;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: scaleX(0);
+}
+
+.futuristic-link:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+  animation: linkGlowPulse 1.5s infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 10px #9b59b6, 0 0 20px #8e44ad;
+    border-color: #9b59b6;
+  }
+  100% {
+    box-shadow: 0 0 20px #b370f5, 0 0 40px #a64dd8;
+    border-color: #b370f5;
+  }
+}
+
+@keyframes textGlowPulse {
+  0% {
+    text-shadow: 0 0 8px #9b59b6, 0 0 16px #8e44ad;
+  }
+  100% {
+    text-shadow: 0 0 16px #b370f5, 0 0 32px #a64dd8;
+  }
+}
+
+@keyframes linkGlowPulse {
+  0% {
+    box-shadow: 0 0 6px #9b59b6, 0 0 12px #8e44ad;
+  }
+  100% {
+    box-shadow: 0 0 12px #b370f5, 0 0 24px #a64dd8;
+  }
+}
+
+@media (max-width: 768px) {
+  .futuristic-navbar {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 769px) {
+  .futuristic-navbar {
+    font-size: 16px;
+  }
+}
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.futuristic-navbar {
+  background: rgba(10, 10, 20, 0.85);
+  border: 2px solid #9b59b6;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #9b59b6;
+  backdrop-filter: blur(6px);
+  font-family: 'Orbitron', sans-serif;
+
+  animation: glowPulse 2s infinite alternate;
+}
+
+.futuristic-brand {
+  color: #fff;
+  text-shadow: 0 0 8px #9b59b6, 0 0 16px #8e44ad;
+  font-weight: 700;
+
+  animation: textGlowPulse 2s infinite alternate;
+}
+
+.futuristic-link {
+  color: #fff;
+  text-shadow: 0 0 4px #9b59b6;
+  margin-right: 12px;
+  transition: all 0.3s ease;
+}
+
+.futuristic-link:hover {
+  color: #e1bfff;
+  text-shadow: 0 0 12px #9b59b6, 0 0 24px #8e44ad;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 10px #9b59b6, 0 0 20px #8e44ad;
+    border-color: #9b59b6;
+  }
+  100% {
+    box-shadow: 0 0 20px #b370f5, 0 0 40px #a64dd8;
+    border-color: #b370f5;
+  }
+}
+
+@keyframes textGlowPulse {
+  0% {
+    text-shadow: 0 0 8px #9b59b6, 0 0 16px #8e44ad;
+  }
+  100% {
+    text-shadow: 0 0 16px #b370f5, 0 0 32px #a64dd8;
+  }
+}
+
+@media (max-width: 768px) {
+  .futuristic-navbar {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 769px) {
+  .futuristic-navbar {
+    font-size: 16px;
+  }
+}

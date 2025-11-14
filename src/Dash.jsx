@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Image,Navbar, Accordion, Card, Button, Dropdown } from 'react-bootstrap';
-import './neutral.css'
+import './neutral.css';
+import QuickNav from './Nav';
 import ThemeSelector from './Themer';
 function Dash() {
   const [theme, setTheme] = useState('purple');
@@ -69,6 +70,7 @@ function Dash() {
   return (
     <Container fluid className="full-scroll-container">
       {/* Hero Header */}
+      <QuickNav />
       <div className ='dash-top'> 
       <Navbar variant='dark'>  
 

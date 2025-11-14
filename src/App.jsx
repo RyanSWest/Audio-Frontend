@@ -7,6 +7,7 @@ import './neutral.css';
 import '../public/themes/purple.css';
 import MiniPlaylist from './mini';
 import {Image, Card, Button,Dropdown,DropdownButton, Offcanvas, Container}from 'react-bootstrap'
+import QuickNav from './Nav';
 
 function App() {
   const [file, setFile] = useState(null);
@@ -143,7 +144,8 @@ useEffect(() => {
 
   return (
     <Container className= 'full-scroll-container'>  
-    <div className="dash-top">
+    <QuickNav />
+?    <div className="dash-top">
       <div>  
            {/* <Button variant="primary" onClick={handleClose}>
          {user.username} Playlist
@@ -180,7 +182,7 @@ useEffect(() => {
     </Dropdown> */}
       </div>
       <section className='top'> 
-        <MiniPlaylist/>
+        <MiniPlaylist style ={{zIndex:1}}/>
         
 
 
