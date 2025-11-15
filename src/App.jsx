@@ -28,16 +28,10 @@ function App() {
   const [user, setUser] = useState({});
   const [playlist, setPlaylist] = useState([]);
   const [hitSong,setHitsong]=useState({})
-  const [list, setList] = useState(false);
-  const [show, setShow] = useState(false);
-  const [activeKey, setActiveKey] = useState(null);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+  
   const navigate = useNavigate();
 
-  const API_URL = "http://3.147.102.4:3002";
+const API_URL = 'https://api.maybeart.app:3002';
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -167,38 +161,7 @@ function App() {
       <QuickNav />?{" "}
       <div className="dash-top">
         <div>
-          {/* <Button variant="primary" onClick={handleClose}>
-         {user.username} Playlist
-      </Button>
-
-      <Offcanvas show={show} onHide={handleClose}  placement='end' responsive="lg">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-           {playlist.map((element) => (
-           <> 
-           <p>{element.title}</p>
-           <audio controls >
-             <source src={element.url} type="audio/mpeg" />
-             Your browser does not support the audio element.
-           </audio>
-            
-           </> 
-        ))}
-        </Offcanvas.Body>
-      </Offcanvas>  */}
-
-          {/* <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Dropdown Button
-      </Dropdown.Toggle>
-
-      <Dropdown.Menu>
-         <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown> */}
+  
         </div>
         <section className="profile-hero">
           <Image
@@ -240,34 +203,7 @@ function App() {
             />
           </section>
 
-          {/* <section>
-            <form type="submit">
-              <input
-                type="text"
-                placeholder="enter valid url"
-                value={audioUrl}
-                onChange={(e) => setAudioUrl(e.target.value)}
-              />
-
-              <input
-                type="text"
-                placeholder="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-
-              <input
-                type="text"
-                placeholder="genre (optional)"
-                value={genre}
-                onChange={(e) => setGenre(e.target.value)}
-              />
-              <button type ='submit'
-                  onClick ={createUrlFile} >  
-                  
-                  </button>
-            </form>
-          </section> */}
+          
 
           <section className="sec">
             <button

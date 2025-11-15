@@ -6,6 +6,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const API_URL = 'https://api.maybeart.app:3002';
 
   useEffect(()=>{
 
@@ -20,7 +21,7 @@ function Login() {
     // setEmail(email.toLowerCase())
 
     try {
-      const response = await axios.post('http://3.147.102.4:3002/login', {
+      const response = await axios.post(`${API_URL}/login`, {
         email,
         password
       }, {
