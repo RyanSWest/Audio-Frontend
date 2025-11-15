@@ -20,7 +20,7 @@ export default function MiniPlaylist() {
   useEffect(() => {
      const getLibrary = async () => {
       try {
-        const res = await axios.get('http://localhost:3002/library', {
+        const res = await axios.get('http://3.147.102.4:3002/library', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPlaylist(res.data.library || []);

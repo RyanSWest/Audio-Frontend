@@ -6,7 +6,7 @@ import'./login.css';
 import './neutral.css';
 import '../public/themes/purple.css';
 import MiniPlaylist from './mini';
-import {Image, Card, Button,Dropdown,DropdownButton, Offcanvas, Container}from 'react-bootstrap'
+import {Image, Card, Button,Dropdown,DropdownButton,Accordion, Offcanvas, Container}from 'react-bootstrap'
 import QuickNav from './Nav';
 
 function App() {
@@ -20,21 +20,25 @@ function App() {
   const [playlist,setPlaylist]=useState([]);
   const [list,setList]=useState(false)
    const [show, setShow] = useState(false);
+   const [activeKey, setActiveKey] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const navigate=useNavigate()
   
+  const API_URL = 'http://3.147.102.4:3002'
 
 
 useEffect(() => {
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem('token'); // keep using your token
-        if (!token) return;
+        if (!token)  
+          
+          return;
 
-        const response = await axios.get('http://localhost:3002/me', {
+        const response = await axios.get(`${API_URL}/me`, {
           headers: {
             Authorization: `Bearer ${token}`, // pass token in header
           },
@@ -54,7 +58,7 @@ useEffect(() => {
         const token = localStorage.getItem('token'); // keep using your token
         if (!token) return;
 
-        const response = await axios.get('http://localhost:3002/library', {
+        const response = await axios.get( `${API_URL}/library`, {
           headers: {
             Authorization: `Bearer ${token}`, // pass token in header
           },
@@ -69,7 +73,7 @@ useEffect(() => {
     }
     getLibrary();
     fetchUser();
-  }, [playlist.length]);
+  }, []);
 
 
   console.log('Token:', localStorage.getItem('token'));
@@ -117,7 +121,7 @@ useEffect(() => {
       return;
     }
 
-      const response = await axios.post('http://localhost:3002/upload',formData,
+      const response = await axios.post(`${API_URL}/upload`,formData,
     {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -181,34 +185,25 @@ useEffect(() => {
       </Dropdown.Menu>
     </Dropdown> */}
       </div>
-      <section className='top'> 
-        <MiniPlaylist style ={{zIndex:1}}/>
-        
+   <section className='profile-hero'>
+  <Image
+    src={user.photo}
+    className='profile-pic'
+    roundedCircle
+    width="85"
+    height="85"
+    alt="User Photo"
+  />
+  <h2
+    onClick={() => navigate('/dashboard')}
+    className='playlist-name'
+  >
+    {user.username}
+  </h2>
+</section>
 
-
-
-         <Image src={user.photo} className  = 'profile-pic'roundedCircle
-        
-        width="100" height="100" alt="User Photo"  />
-               <h2  
-               onClick={()=>navigate('/dashboard')}
-               className ='playlist-name'>{user.username}</h2>
  
-        {/* <p>{user.bio}</p> */}
-      </section>
 
-
-
-      <section className='playlist'>
-         
-        
- 
-        
-          
-
-         
-        
-      </section>
             <div className="bg-overlay" aria-hidden="true"></div>
             
        
@@ -219,6 +214,9 @@ useEffect(() => {
         <h2 className="playlist-name" 
         onClick={()=>navigate('/dashboard')}
         >{user.username}'s Playlist</h2>
+        <div style={{ maxHeight: '500px', overflowY: 'auto', marginTop: '20px' }}>
+   
+ </div>
           <input 
           type="file" 
           accept="audio/*" 
@@ -277,11 +275,15 @@ className='form'
       {audioUrl && (
         <div className="player">
           <h3>Your uploaded audio:</h3>
-          <audio controls src={audioUrl}>
+           <audio controls src={audioUrl}>
             Your browser does not support audio playback.
           </audio>
         </div>
       )}
+
+      {/* <section className='mini-section'>
+        <MiniPlaylist />
+      </section> */}
     </div>
     </Container>
   );

@@ -5,13 +5,17 @@ import { Container, Row, Col, Image,Navbar, Accordion, Card, Button, Dropdown } 
 import './neutral.css';
 import QuickNav from './Nav';
 import ThemeSelector from './Themer';
+
+
 function Dash() {
   const [theme, setTheme] = useState('purple');
   const [user, setUser] = useState({});
   const [playlist, setPlaylist] = useState([]);
   const [audioUrl, setAudioUrl] = useState('');
   const [title, setTitle] = useState('');
- 
+   
+
+  const API_URL = 'http://3.147.102.4:3002'
   const navigate = useNavigate()
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -19,7 +23,7 @@ function Dash() {
 
     const fetchUser = async () => {
       try {
-        const res = await axios.get('http://localhost:3002/me', {
+        const res = await axios.get( `${API_URL}/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(res.data);
@@ -30,7 +34,7 @@ function Dash() {
 
     const getLibrary = async () => {
       try {
-        const res = await axios.get('http://localhost:3002/library', {
+        const res = await axios.get( `${API_URL}/library`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPlaylist(res.data.library || []);
@@ -58,7 +62,7 @@ function Dash() {
   }, [theme]);
 
   const destroy = (id) => {
-     axios.delete(`http://localhost:3002/library/${id}`, {
+     axios.delete(`${API_URL}/library/${id}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     }).then(() => {
       setPlaylist(playlist.filter((el) => el.id !== id));
@@ -94,17 +98,16 @@ function Dash() {
       <Row className="align-items-center mb-4 flex-column flex-lg-row hero-section">
         <Col lg="auto" className="d-flex align-items-center gap-3 mb-3 mb-lg-0">
          
-          <div className='top'>
-             <Image
-            src={user.photo}
-            roundedCircle
-            width={100}
-            height={100}
-            className="profile-pic"
-          />
-            <h1 className="profile-text mb-1">{user.username}</h1>
-           </div>
-             
+         <section className="profile-hero">
+  <div className="profile-info">
+    <img src={user.photo} alt="User" className="profile-pic" />
+    <div className="profile-text-container">
+      <h2 className="profile-name">{user.username}</h2>
+      <p className="profile-bio">{user.bio}</p>
+    </div>
+  </div>
+</section>
+
          </Col>
 
         <Col className="d-flex gap-2 justify-content-lg-end">
