@@ -26,7 +26,9 @@ function Dash() {
         const res = await axios.get( `${API_URL}/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
+        console.log(res.data)
         setUser(res.data);
+        console.log("USER NOW++>",user)
       } catch (err) {
         console.error(err);
       }
@@ -37,6 +39,7 @@ function Dash() {
         const res = await axios.get( `${API_URL}/library`, {
           headers: { Authorization: `Bearer ${token}` },
         });
+        console.log(res.data)
         setPlaylist(res.data.library || []);
       } catch (err) {
         console.error(err);
@@ -60,6 +63,13 @@ function Dash() {
       document.head.appendChild(link);
     }
   }, [theme]);
+
+  const logout = () => {
+  localStorage.removeItem('token');       // fix the quote
+  console.log('Logout successful');       // fix the quote
+  navigate('/');                          // redirect to home or login
+};
+
 
   const destroy = (id) => {
      axios.delete(`${API_URL}/library/${id}`, {
@@ -103,9 +113,22 @@ function Dash() {
     <img src={user.photo} alt="User" className="profile-pic" />
     <div className="profile-text-container">
       <h2 className="profile-name">{user.username}</h2>
-      <p className="profile-bio">{user.bio}</p>
+      <Button variant primary onClick={logout}> Logout</Button>
+      {/* <p className="profile-bio">{user.bio}</p> */}
     </div>
   </div>
+</section>
+<section  > 
+
+  <Accordion className="mt-4">
+  <Accordion.Item eventKey="0">
+    <Accordion.Header className='playlist-name'>📤 Upload New Music</Accordion.Header>
+    <Accordion.Body>
+      {/* <Upload /> */}
+      <h1>Faggy</h1>
+    </Accordion.Body>
+  </Accordion.Item>
+</Accordion>
 </section>
 
          </Col>
@@ -126,6 +149,9 @@ function Dash() {
             <div className="player">
               <h5>{title}</h5>
               <audio controls src={audioUrl} style={{ width: '100%' }} />
+              <button onClick={() => navigator.clipboard.writeText(track.url)}>
+  Copy URL
+</button>
             </div>
           </Col>
         </Row>
@@ -136,7 +162,7 @@ function Dash() {
         <Col lg={12}>
           <section className="scroll-section">
             {playlist.length > 0 ? (
-              playlist.map((el) => (
+              playlist.map((el,idx) => (
                 <Card
                   key={el.id}
                   className="mb-3 bg-transparent border-glow p-3 playlist-card"
@@ -154,7 +180,15 @@ function Dash() {
                     >
                       ▶ Play
                     </Button>
-
+                   <a href ={el.url}> {el.url}</a>
+                   {/* <button 
+    className="cyberpunk-button"
+    onClick={() => {
+     
+    }}
+  >
+    📋 Copy URL
+  </button> */}
 
                   </Card.Body>
                   <Card.Footer>

@@ -15,6 +15,7 @@ function Register() {
     e.preventDefault();
     setLoading(true);
     setMessage('');
+    setEmail(email.toLowerCase())
 
     try {
       const response = await axios.post(`${API_URL}/register`, {
