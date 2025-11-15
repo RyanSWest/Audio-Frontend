@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 import axios from 'axios';
 
 function Login() {
@@ -7,13 +7,20 @@ function Login() {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
+  useEffect(()=>{
+
+    setEmail('')
+    setPassword('')
+  },[])
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
+    // setEmail(email.toLowerCase())
 
     try {
-      const response = await axios.post('http://localhost:3002/login', {
+      const response = await axios.post('http://3.147.102.4:3002/login', {
         email,
         password
       }, {
@@ -26,6 +33,7 @@ function Login() {
         setMessage('✅ Login successful!');
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
+        console.log("BIOTCH",password)
         console.log('Logged in:', response.data.user);
         
         setTimeout(() => {
@@ -39,7 +47,7 @@ function Login() {
       setLoading(false);
     }
   };
-
+   console.log("PASSWORD",password)
   return (
     <div style={{ maxWidth: '500px', margin: '50px auto', padding: '20px' }}>
       <h1>🎵 Login</h1>

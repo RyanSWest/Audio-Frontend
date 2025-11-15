@@ -33,3 +33,119 @@
   scrollbar-width: thick;
   scrollbar-color: rgba(200,200,200,0.8) rgba(255,255,255,0.05);
 }
+
+
+.profile-hero {
+  width: 100%;
+  padding: 20px;
+  background: rgba(10,10,20,0.9);
+  border-bottom: 2px solid #9b59b6;
+  display: flex ;
+  flex-direction: column;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap; /* makes it stack on small screens */
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #9b59b6;
+  box-shadow: 0 0 8px #9b59b6;
+  flex-shrink: 0; /* prevents shrinking on small screens */
+}
+
+.profile-text-container {
+  max-width: 400px; /* prevents text from overflowing */
+}
+
+.profile-name {
+  font-family: 'Orbitron', sans-serif; /* futuristic font */
+  font-size: 1.8rem;
+  margin: 0;
+  color: #9b59b6;
+  text-shadow: 0 0 6px #9b59b6;
+}
+
+.profile-bio {
+  font-size: 0.9rem;
+  color: #fff;
+  line-height: 1.3rem;
+  margin-top: 4px;
+  overflow-wrap: break-word; /* prevents long text from overflowing */
+}
+
+.form-sec {
+  display: flex;
+  flex-direction: column; /* stack by default */
+  gap: 12px;
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.form-input {
+  width: 100%; /* ensures it shrinks to container */
+  box-sizing: border-box; /* includes padding in width */
+  padding: 12px 16px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  border: 2px solid #9b59b6;
+  border-radius: 8px;
+  background: rgba(20, 20, 30, 0.9);
+  color: #fff;
+  outline: none;
+  transition: 0.3s all;
+}
+
+.form-input::placeholder {
+  color: #aaa;
+}
+
+.form-input:focus {
+  border-color: #00ffea;
+  box-shadow: 0 0 8px #00ffea;
+}
+
+/* Horizontal layout for larger screens */
+@media (min-width: 992px) {
+  .form-sec {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .form-input {
+    flex: 1; /* evenly share space */
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .form-input {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+}
+
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .profile-pic {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile-name {
+    font-size: 1.4rem;
+  }
+
+  .profile-bio {
+    font-size: 0.8rem;
+  }
+}

@@ -5,13 +5,17 @@ import { Container, Row, Col, Image,Navbar, Accordion, Card, Button, Dropdown } 
 import './neutral.css';
 import QuickNav from './Nav';
 import ThemeSelector from './Themer';
+
+
 function Dash() {
   const [theme, setTheme] = useState('purple');
   const [user, setUser] = useState({});
   const [playlist, setPlaylist] = useState([]);
   const [audioUrl, setAudioUrl] = useState('');
   const [title, setTitle] = useState('');
- 
+   
+
+  const API_URL = 'http://3.147.102.4:3002'
   const navigate = useNavigate()
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -19,10 +23,12 @@ function Dash() {
 
     const fetchUser = async () => {
       try {
-        const res = await axios.get('http://localhost:3002/me', {
+        const res = await axios.get( `${API_URL}/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
+        console.log(res.data)
         setUser(res.data);
+        console.log("USER NOW++>",user)
       } catch (err) {
         console.error(err);
       }
@@ -30,9 +36,10 @@ function Dash() {
 
     const getLibrary = async () => {
       try {
-        const res = await axios.get('http://localhost:3002/library', {
+        const res = await axios.get( `${API_URL}/library`, {
           headers: { Authorization: `Bearer ${token}` },
         });
+        console.log(res.data)
         setPlaylist(res.data.library || []);
       } catch (err) {
         console.error(err);
@@ -57,8 +64,15 @@ function Dash() {
     }
   }, [theme]);
 
+  const logout = () => {
+  localStorage.removeItem('token');       // fix the quote
+  console.log('Logout successful');       // fix the quote
+  navigate('/');                          // redirect to home or login
+};
+
+
   const destroy = (id) => {
-     axios.delete(`http://localhost:3002/library/${id}`, {
+     axios.delete(`${API_URL}/library/${id}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     }).then(() => {
       setPlaylist(playlist.filter((el) => el.id !== id));
@@ -94,17 +108,29 @@ function Dash() {
       <Row className="align-items-center mb-4 flex-column flex-lg-row hero-section">
         <Col lg="auto" className="d-flex align-items-center gap-3 mb-3 mb-lg-0">
          
-          <div className='top'>
-             <Image
-            src={user.photo}
-            roundedCircle
-            width={100}
-            height={100}
-            className="profile-pic"
-          />
-            <h1 className="profile-text mb-1">{user.username}</h1>
-           </div>
-             
+         <section className="profile-hero">
+  <div className="profile-info">
+    <img src={user.photo} alt="User" className="profile-pic" />
+    <div className="profile-text-container">
+      <h2 className="profile-name">{user.username}</h2>
+      <Button variant primary onClick={logout}> Logout</Button>
+      {/* <p className="profile-bio">{user.bio}</p> */}
+    </div>
+  </div>
+</section>
+<section  > 
+
+  <Accordion className="mt-4">
+  <Accordion.Item eventKey="0">
+    <Accordion.Header className='playlist-name'>📤 Upload New Music</Accordion.Header>
+    <Accordion.Body>
+      {/* <Upload /> */}
+      <h1>Faggy</h1>
+    </Accordion.Body>
+  </Accordion.Item>
+</Accordion>
+</section>
+
          </Col>
 
         <Col className="d-flex gap-2 justify-content-lg-end">
@@ -123,6 +149,9 @@ function Dash() {
             <div className="player">
               <h5>{title}</h5>
               <audio controls src={audioUrl} style={{ width: '100%' }} />
+              <button onClick={() => navigator.clipboard.writeText(track.url)}>
+  Copy URL
+</button>
             </div>
           </Col>
         </Row>
@@ -133,7 +162,7 @@ function Dash() {
         <Col lg={12}>
           <section className="scroll-section">
             {playlist.length > 0 ? (
-              playlist.map((el) => (
+              playlist.map((el,idx) => (
                 <Card
                   key={el.id}
                   className="mb-3 bg-transparent border-glow p-3 playlist-card"
@@ -151,7 +180,15 @@ function Dash() {
                     >
                       ▶ Play
                     </Button>
-
+                   <a href ={el.url}> {el.url}</a>
+                   {/* <button 
+    className="cyberpunk-button"
+    onClick={() => {
+     
+    }}
+  >
+    📋 Copy URL
+  </button> */}
 
                   </Card.Body>
                   <Card.Footer>

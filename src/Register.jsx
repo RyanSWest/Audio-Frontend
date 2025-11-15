@@ -9,14 +9,16 @@ function Register() {
   const [photo, setPhoto] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-
+  
+  const API_URL ='http://3.147.102.4:3002'
   const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
+    setEmail(email.toLowerCase())
 
     try {
-      const response = await axios.post('http://localhost:3002/register', {
+      const response = await axios.post(`${API_URL}/register`, {
         username,
         email,
         password,
