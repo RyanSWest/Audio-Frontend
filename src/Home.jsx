@@ -14,13 +14,13 @@ function Home() {
             <Carousel> 
 
 
-              <Carousel.Item> 
+              {/* <Carousel.Item> 
                 <Image src ='https://images.nightcafe.studio/jobs/NhyvNsjRQ8Wu1RWJTt6n/NhyvNsjRQ8Wu1RWJTt6n--grid.jpg?tr=w-1600,c-at_max'/>
               </Carousel.Item>
-              
-              <Carousel.Item> 
+               */}
+              {/* <Carousel.Item> 
                 <Image src ='https://images.nightcafe.studio/jobs/o1IPlELbHJUQIkBXNzJ4/o1IPlELbHJUQIkBXNzJ4--0--699ol.jpg?tr=w-1600,c-at_max'/>
-               </Carousel.Item>
+               </Carousel.Item> */}
             </Carousel>
 
             <Link to ='/login'>   <h3 className='profile-text'> Login</h3></Link>

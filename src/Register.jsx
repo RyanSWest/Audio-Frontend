@@ -9,7 +9,7 @@ function Register() {
   const [photo, setPhoto] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const API_URL = 'https://api.maybeart.app';
+  const API_URL = 'https://api.maybeart.app:3001';
 
   // const API_URL ='http://3.147.102.4:3002'
   const handleRegister = async (e) => {
