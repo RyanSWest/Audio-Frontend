@@ -15,7 +15,7 @@ function Dash() {
   const [title, setTitle] = useState('');
    
 
-const API_URL = 'https://api.maybeart.app:3002';
+const API_URL = 'https://api.maybeart.app';
   const navigate = useNavigate()
   useEffect(() => {
     const token = localStorage.getItem('token');

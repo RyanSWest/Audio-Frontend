@@ -6,7 +6,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const API_URL = 'https://api.maybeart.app:3002';
+  const API_URL = 'https://api.maybeart.app';
 
   useEffect(()=>{
 
