@@ -1,4 +1,9 @@
  const token ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJTcmlIYW51bWFuIiwiaWF0IjoxNzYzMzU0NTkzLCJleHAiOjE3NjM0NDA5OTN9.H4QSwh6S6fTw-hZHr9JnUgE24cgLpa5nNa2fkRzxQJo'
+
+const API_URL ='https://api.maybeart.app:3002'
+
+
+
  function useState(initial) {
   let value = initial;
 
@@ -47,13 +52,16 @@ fetch("https://api.maybeart.app:3002/library", {
 })
   .then(res => res.json())
   .then(data =>  
-    console.log(data.library)
+    console.log(data.library[0])
 
      )
    .catch(err => console.error("ERROR:", err));
 
 
-
+ const lastUpload = crap[    0];
+ console.log("LAST",lastUpload, crap[-1])
+  const currentUpload = `${API_URL}/${lastUpload.url}`
+  console.log(currentUpload)
 
  const player = (arr) => {
   if (!Array.isArray(arr)) return []; // safeguard

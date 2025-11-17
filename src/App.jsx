@@ -60,7 +60,7 @@ function App() {
 
     fetchUser();
     fetchLibrary();
-  }, []);
+  }, [playlist.length]);
 
   // File selection for upload
   const handleFileChange = (e) => {
@@ -133,7 +133,11 @@ function App() {
     }
   };
 
-  const lastUpload = playlist[-1]
+
+
+  const lastUpload = playlist[-1];
+  const currentUpload = `${API_URL}/${lastUpload.url}`
+  console.log(currentUpload)
 
   // Logout
   const logout = () => {
