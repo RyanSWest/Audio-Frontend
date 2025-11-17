@@ -31,7 +31,7 @@ function App() {
   
   const navigate = useNavigate();
 
-const API_URL = 'https://api.maybeart.app';
+const API_URL = 'https://api.maybeart.app:3002';
 
   useEffect(() => {
     const fetchUser = async () => {

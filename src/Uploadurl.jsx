@@ -20,11 +20,12 @@ function Uploadurl() {
   const [playlist, setPlaylist] = useState([]);
 
        const token =localStorage.getItem('token')
+  const API_URL = 'https://api.maybeart.app:3002';
 
 
   useEffect(()=>{
 
-    axios.get('http://3.147.102.4:3002/me', {
+    axios.get( `${API_URL}/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -56,7 +57,7 @@ function Uploadurl() {
     const payload = { file: audioUrl,audio: audioUrl, title: title, genre: genre };
  
     try {
-      const response = await axios.post('http://3.147.102.4:3002/upload-url', payload, {
+      const response = await axios.post(`${API_URL}/upload-url`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
   'Content-Type': 'application/json'        },
