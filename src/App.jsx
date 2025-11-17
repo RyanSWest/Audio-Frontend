@@ -113,7 +113,7 @@ function App() {
         },
       });
 
-      const serverUrl = `${API_URL}/${res.data.audio.url}`;
+      const serverUrl = `${API_URL}${res.data.audio.url}`;
       setAudioUrl(serverUrl); // show uploaded file
       setMessage("✅ Upload successful!");
 
@@ -194,7 +194,7 @@ function App() {
         {audioUrl && (
           <div className="player">
             <h3>Playing:</h3>
-            <audio controls src={audioUrl} style={{ width: "100%" }} />
+            <audio controls src={`${API_URL}${audioUrl}`} style={{ width: "100%" }} />
           </div>
         )}
 
