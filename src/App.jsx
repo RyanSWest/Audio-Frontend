@@ -113,9 +113,9 @@ function App() {
         },
       });
 
-      const serverUrl = `${API_URL}/${res.data.audio.url}`;
+      const serverUrl = `${API_URL}${res.data.audio.url}`;
       console.log("SERV==>",serverUrl)
-      // setAudioUrl(serverUrl); // show uploaded file
+      setAudioUrl(serverUrl); // show uploaded file
       setMessage("✅ Upload successful!");
 
       // Add uploaded track to playlist locally
