@@ -144,10 +144,11 @@ const API_URL = 'https://api.maybeart.app:3002';
          console.log('FORMBITCH',formData)
 
           const previewUrl = URL.createObjectURL(audioFile);
+          console.log("PREVIEW",previewurl)
   setAudioUrl(previewUrl);  // Shows local preview
 
 
-
+     console.log()
 
       const response = await axios.post(`${API_URL}/upload`, formData, {
         headers: {
@@ -164,7 +165,7 @@ const API_URL = 'https://api.maybeart.app:3002';
       console.log("Response:", response.data,formData);
       console.log("Uploaded audio URL:", response.data.audio.url);
 
-        const serverUrl = `https://api.maybeart.app:3002/uploads/${response.data.audio.filename}`;
+        const serverUrl = `https://api.maybeart.app:3002/${response.data.audio.url}`;
           setAudioUrl(serverUrl);  // Replace preview with server URL
 
     } catch (error) {
