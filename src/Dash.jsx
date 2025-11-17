@@ -13,6 +13,7 @@ function Dash() {
   const [playlist, setPlaylist] = useState([]);
   const [audioUrl, setAudioUrl] = useState('');
   const [title, setTitle] = useState('');
+  const [currTitle,setCurrTitle]=useState('')
    
 
 const API_URL = 'https://api.maybeart.app:3002';
@@ -145,11 +146,11 @@ const API_URL = 'https://api.maybeart.app:3002';
         <Row className="mb-3">
           <Col>
             <div className="player">
-              <h5>{title}</h5>
-              <audio controls src={`${API_URL}/${audioUrl}`} style={{ width: '100%' }} />
-              <button onClick={() => navigator.clipboard.writeText(track.url)}>
+              <h5>{currTitle}</h5>
+              <audio controls src={`${audioUrl}`} style={{ width: '100%' }} />
+              {/* <button onClick={() => navigator.clipboard.writeText(track.url)}>
   Copy URL
-</button>
+</button> */}
             </div>
           </Col>
         </Row>
@@ -170,7 +171,7 @@ const API_URL = 'https://api.maybeart.app:3002';
             <Card
               key={el.id}
               className="mb-3 bg-transparent border-glow p-3 playlist-card"
-              onClick={() => setTitle(el.title)}
+              onClick={() => setCurrTitle(el.title)}
             >
               <Card.Body className="d-flex justify-content-between align-items-center flex-wrap">
                 <Card.Title className="mb-2 mb-sm-0">{el.title}</Card.Title>

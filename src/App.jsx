@@ -206,7 +206,7 @@ function App() {
               const trackUrl =
                 el.filename === "external-url"
                   ? el.originalName
-                  : `${API_URL}${el.url}`;
+                  : `${API_URL}/${el.url}`;
 
               return (
                 <Card
