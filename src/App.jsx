@@ -32,9 +32,9 @@ function App() {
   
   const navigate = useNavigate();
 
-// const API_URL = 'https://api.maybeart.app:3002';
- API_URL=http://localhost:3002
-    const fuckface  = 'https://api.maybeart.app:3002/uploads/1763341067548-333091809.wav'
+const API_URL = 'https://api.maybeart.app:3002';
+//  API_URL=http://localhost:3002
+    // const fuckface  = 'https://api.maybeart.app:3002/uploads/1763341067548-333091809.wav'
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -261,8 +261,7 @@ function App() {
           />
           {message && <p className="message">{message}</p>}
         </div>
-        <audio controls src ={fuckface}></audio>
-
+ 
         {audioUrl && (
           <div className="player">
             <h3>Your uploaded audio:</h3>
