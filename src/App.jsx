@@ -29,9 +29,12 @@ function App() {
   const [playlist, setPlaylist] = useState([]);
   const [hitSong,setHitsong]=useState({})
   
+  
   const navigate = useNavigate();
 
-const API_URL = 'https://api.maybeart.app:3002';
+// const API_URL = 'https://api.maybeart.app:3002';
+ API_URL=http://localhost:3002
+    const fuckface  = 'https://api.maybeart.app:3002/uploads/1763341067548-333091809.wav'
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -77,6 +80,8 @@ const API_URL = 'https://api.maybeart.app:3002';
   console.log("Token:", localStorage.getItem("token"));
   console.log("User in App:", user);
   console.log("PLAYLIST:", playlist);
+
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -88,6 +93,7 @@ const API_URL = 'https://api.maybeart.app:3002';
       const titleFromFile = fileName.replace(/\.(mp3|wav|ogg|m4a|flac)$/i, "");
       setTitle(titleFromFile);
       setFile(selectedFile);
+      console.log("SELETE==========>",selectedFile)
 
       setMessage("✅ File selected: " + selectedFile.name);
     }
@@ -135,7 +141,14 @@ const API_URL = 'https://api.maybeart.app:3002';
         setUploading(false);
         return;
       }
-        //  console.log('FORMBITCH',formData)
+         console.log('FORMBITCH',formData)
+
+          const previewUrl = URL.createObjectURL(audioFile);
+  setAudioUrl(previewUrl);  // Shows local preview
+
+
+
+
       const response = await axios.post(`${API_URL}/upload`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -146,9 +159,14 @@ const API_URL = 'https://api.maybeart.app:3002';
       
 
       setMessage("✅ Upload successful!");
-      setAudioUrl(response.data.audio.url);
+       setAudioUrl( );
+       console.log("udio===>>>:" ,audioUrl)
       console.log("Response:", response.data,formData);
       console.log("Uploaded audio URL:", response.data.audio.url);
+
+        const serverUrl = `https://api.maybeart.app:3002/uploads/${response.data.audio.filename}`;
+          setAudioUrl(serverUrl);  // Replace preview with server URL
+
     } catch (error) {
       setMessage("❌ Upload failed: " + error.message);
     } finally {
@@ -243,6 +261,7 @@ const API_URL = 'https://api.maybeart.app:3002';
           />
           {message && <p className="message">{message}</p>}
         </div>
+        <audio controls src ={fuckface}></audio>
 
         {audioUrl && (
           <div className="player">
