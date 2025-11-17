@@ -114,7 +114,8 @@ function App() {
       });
 
       const serverUrl = `${API_URL}/${res.data.audio.url}`;
-      setAudioUrl(serverUrl); // show uploaded file
+      console.log("SERV==>",serverUrl)
+      // setAudioUrl(serverUrl); // show uploaded file
       setMessage("✅ Upload successful!");
 
       // Add uploaded track to playlist locally
@@ -122,6 +123,7 @@ function App() {
         ...prev,
         res.data.audio, // assuming server returns the audio object
       ]);
+
     } catch (err) {
       console.error(err);
       setMessage("❌ Upload failed: " + err.message);
@@ -130,6 +132,8 @@ function App() {
       setFile(null);
     }
   };
+
+  const lastUpload = playlist[-1]
 
   // Logout
   const logout = () => {
@@ -190,6 +194,7 @@ function App() {
             </Button>
           </section>
         </div>
+        {/* <audio src = {playlist[-1]} */}
 
         {audioUrl && (
           <div className="player">
