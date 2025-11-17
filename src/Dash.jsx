@@ -118,18 +118,7 @@ const API_URL = 'https://api.maybeart.app:3002';
     </div>
   </div>
 </section>
-<section  > 
-
-  <Accordion className="mt-4">
-  <Accordion.Item eventKey="0">
-    <Accordion.Header className='playlist-name'>📤 Upload New Music</Accordion.Header>
-    <Accordion.Body>
-      {/* <Upload /> */}
-      <h1>Faggy</h1>
-    </Accordion.Body>
-  </Accordion.Item>
-</Accordion>
-</section>
+ 
 
          </Col>
 
