@@ -28,6 +28,7 @@ function App() {
   const [user, setUser] = useState({});
   const [playlist, setPlaylist] = useState([]);
   const [hitSong,setHitsong]=useState({})
+  const [realUrl,setRealurl]= useState('')
   
   
   const navigate = useNavigate();
@@ -166,8 +167,7 @@ const API_URL = 'https://api.maybeart.app:3002';
       console.log("Uploaded audio URL:", response.data.audio.url);
 
         const serverUrl = `https://api.maybeart.app:3002/${response.data.audio.url}`;
-          setAudioUrl(serverUrl);  // Replace preview with server URL
-
+        console.log( "THIS???++++>>>",serverUrl)
     } catch (error) {
       setMessage("❌ Upload failed: " + error.message);
     } finally {

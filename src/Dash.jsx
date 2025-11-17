@@ -34,6 +34,8 @@ const API_URL = 'https://api.maybeart.app:3002';
       }
     };
 
+    const realDeal = `${API_URL}${audiourl}`
+
     const getLibrary = async () => {
       try {
         const res = await axios.get( `${API_URL}/library`, {
@@ -63,6 +65,17 @@ const API_URL = 'https://api.maybeart.app:3002';
       document.head.appendChild(link);
     }
   }, [theme]);
+
+let arr =[]
+
+  playlist.forEach((e)=>{
+    const st = 'https://api.maybeart.app'
+    let end = e.url
+    const pee = st+end
+    arr.push(pee)
+
+  })
+  console.log(arr)
 
   const logout = () => {
   localStorage.removeItem('token');       // fix the quote
@@ -131,6 +144,9 @@ const API_URL = 'https://api.maybeart.app:3002';
                              
         </Col>
       </Row>
+        
+      <audio controls src = {arr[0]}/>
+      <audio controls src={realDeal}/>
 
       {audioUrl && (
         <Row className="mb-3">
