@@ -22,16 +22,7 @@ const [list ,setList]=useState([])
 let list1 =[]
  
  const crap=[
-  {
-    "createdAt": "2025-11-15 07:36:53",
-    "filename": "1763192212936-853702397.wav",
-    "genre": null,
-    "id": 12,
-    "originalName": "157_Cm_HotViolin_01_702.wav",
-    "size": 1646670,
-    "title": "157_Cm_HotViolin_01_702",
-    "url": "/uploads/1763192212936-853702397.wav"
-  },
+ https://api.maybeart.app:3002//uploads/1763372155618-136997796.mp3,
   {
     "createdAt": "2025-11-15 07:30:25",
     "filename": "1763191825032-30093250.wav",
