@@ -17,6 +17,9 @@ function Dash() {
 
 const API_URL = 'https://api.maybeart.app:3002';
   const navigate = useNavigate()
+
+  
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) return;
@@ -34,7 +37,7 @@ const API_URL = 'https://api.maybeart.app:3002';
       }
     };
 
-    const realDeal = `${API_URL}${audiourl}`
+    
 
     const getLibrary = async () => {
       try {
@@ -65,17 +68,9 @@ const API_URL = 'https://api.maybeart.app:3002';
       document.head.appendChild(link);
     }
   }, [theme]);
+ 
 
-let arr =[]
-
-  playlist.forEach((e)=>{
-    const st = 'https://api.maybeart.app'
-    let end = e.url
-    const pee = st+end
-    arr.push(pee)
-
-  })
-  console.log(arr)
+  
 
   const logout = () => {
   localStorage.removeItem('token');       // fix the quote
@@ -145,15 +140,13 @@ let arr =[]
         </Col>
       </Row>
         
-      <audio controls src = {arr[0]}/>
-      <audio controls src={realDeal}/>
-
+     
       {audioUrl && (
         <Row className="mb-3">
           <Col>
             <div className="player">
               <h5>{title}</h5>
-              <audio controls src={audioUrl} style={{ width: '100%' }} />
+              <audio controls src={`${API_URL}/${audioUrl}`} style={{ width: '100%' }} />
               <button onClick={() => navigator.clipboard.writeText(track.url)}>
   Copy URL
 </button>
@@ -163,59 +156,74 @@ let arr =[]
       )}
 
       {/* Playlist */}
-      <Row className="gap-3 flex-column flex-lg-row">
-        <Col lg={12}>
-          <section className="scroll-section">
-            {playlist.length > 0 ? (
-              playlist.map((el,idx) => (
-                <Card
-                  key={el.id}
-                  className="mb-3 bg-transparent border-glow p-3 playlist-card"
-                  onClick={() => setTitle(el.title)}
-                >
-                  <Card.Body className="d-flex justify-content-between align-items-center flex-wrap">
-                    <Card.Title className="mb-2 mb-sm-0">{el.title}</Card.Title>
-                    <Button
-                      className="cyberpunk-button"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setAudioUrl(el.url);
-                      }}
-                    >
-                      ▶ Play
-                    </Button>
-                   <a href ={el.url}> {el.url}</a>
-                   {/* <button 
-    className="cyberpunk-button"
-    onClick={() => {
-     
-    }}
-  >
-    📋 Copy URL
-  </button> */}
+    <Row className="gap-3 flex-column flex-lg-row">
+  <Col lg={12}>
+    <section className="scroll-section">
+      {playlist.length > 0 ? (
+        playlist.map((el) => {
+          // Decide which URL to use
+          const trackUrl = el.url?.startsWith("http")
+            ? el.url
+            : `${API_URL}${el.url || "/" + el.title}`;
 
-                  </Card.Body>
-                  <Card.Footer>
-                    <Button
-                      variant="danger"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        destroy(el.id);
-                      }}
-                    >
-                      X
-                    </Button>
-                  </Card.Footer>
-                </Card>
-              ))
-            ) : (
-              <p>No tracks yet. Upload some fire 🔥</p>
-            )}
-          </section>
-        </Col>
-      </Row>
+          return (
+            <Card
+              key={el.id}
+              className="mb-3 bg-transparent border-glow p-3 playlist-card"
+              onClick={() => setTitle(el.title)}
+            >
+              <Card.Body className="d-flex justify-content-between align-items-center flex-wrap">
+                <Card.Title className="mb-2 mb-sm-0">{el.title}</Card.Title>
+
+                <Button
+                  className="cyberpunk-button"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setAudioUrl(trackUrl); // play the correct URL
+                  }}
+                >
+                  ▶ Play
+                </Button>
+
+                <Button
+                  className="cyberpunk-button"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigator.clipboard.writeText(trackUrl); // copy correct URL
+                  }}
+                >
+                  📋 Copy URL
+                </Button>
+
+                <a href={trackUrl} target="_blank" rel="noopener noreferrer">
+                  {trackUrl}
+                </a>
+              </Card.Body>
+
+              <Card.Footer>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    destroy(el.id);
+                  }}
+                >
+                  X
+                </Button>
+              </Card.Footer>
+            </Card>
+          );
+        })
+      ) : (
+        <p>No tracks yet. Upload some fire 🔥</p>
+      )}
+    </section>
+  </Col>
+</Row>
+
     </div>
     </Container>
   );

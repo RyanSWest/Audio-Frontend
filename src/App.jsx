@@ -11,110 +11,79 @@ import {
   Card,
   Button,
   Dropdown,
-  DropdownButton,
-  Accordion,
-  Offcanvas,
   Container,
 } from "react-bootstrap";
 import QuickNav from "./Nav";
+
+const API_URL = "https://api.maybeart.app:3002";
 
 function App() {
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState("");
-  const [audioUrl, setAudioUrl] = useState("");
+  const [audioUrl, setAudioUrl] = useState(""); // currently playing/preview
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
   const [user, setUser] = useState({});
   const [playlist, setPlaylist] = useState([]);
-  const [hitSong,setHitsong]=useState({})
-  const [realUrl,setRealurl]= useState('')
-  
-  
+  const [hitSong, setHitsong] = useState({});
+
   const navigate = useNavigate();
 
-const API_URL = 'https://api.maybeart.app:3002';
-//  API_URL=http://localhost:3002
-    // const fuckface  = 'https://api.maybeart.app:3002/uploads/1763341067548-333091809.wav'
-
+  // Fetch user and playlist on mount
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
     const fetchUser = async () => {
       try {
-        const token = localStorage.getItem("token"); // keep using your token
-        if (!token) return;
-
-        const response = await axios.get(`${API_URL}/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`, // pass token in header
-          },
+        const res = await axios.get(`${API_URL}/me`, {
+          headers: { Authorization: `Bearer ${token}` },
         });
-
-        setUser(response.data); // your /me returns req.user directly
-        console.log("User data:", response.data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
+        setUser(res.data);
+      } catch (err) {
+        console.error("Error fetching user:", err);
         setUser({});
       }
     };
 
-    const getLibrary = async () => {
+    const fetchLibrary = async () => {
       try {
-        const token = localStorage.getItem("token"); // keep using your token
-        if (!token) return;
-
-        const response = await axios.get(`${API_URL}/library`, {
-          headers: {
-            Authorization: `Bearer ${token}`, // pass token in header
-          },
+        const res = await axios.get(`${API_URL}/library`, {
+          headers: { Authorization: `Bearer ${token}` },
         });
-
-        console.log("Library data:", response.data.library);
-        setPlaylist(response.data.library || []);
-      } catch (error) {
-        console.error("Error fetching library data:", error);
+        setPlaylist(res.data.library || []);
+      } catch (err) {
+        console.error("Error fetching library:", err);
       }
     };
-    getLibrary();
+
     fetchUser();
+    fetchLibrary();
   }, []);
 
-  console.log("Token:", localStorage.getItem("token"));
-  console.log("User in App:", user);
-  console.log("PLAYLIST:", playlist);
-
-
+  // File selection for upload
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    if (selectedFile) {
-      if (!selectedFile.type.startsWith("audio/")) {
-        setMessage("❌ Please select an audio file");
-        return;
-      }
-      const fileName = selectedFile.name;
-      const titleFromFile = fileName.replace(/\.(mp3|wav|ogg|m4a|flac)$/i, "");
-      setTitle(titleFromFile);
-      setFile(selectedFile);
-      console.log("SELETE==========>",selectedFile)
+    if (!selectedFile) return;
 
-      setMessage("✅ File selected: " + selectedFile.name);
+    if (!selectedFile.type.startsWith("audio/")) {
+      setMessage("❌ Please select an audio file");
+      return;
     }
+
+    const cleanTitle = selectedFile.name.replace(/\.(mp3|wav|ogg|m4a|flac)$/i, "");
+    setTitle(cleanTitle);
+    setFile(selectedFile);
+
+    // Show local preview
+    const previewUrl = URL.createObjectURL(selectedFile);
+    setAudioUrl(previewUrl);
+
+    setMessage(`✅ File selected: ${selectedFile.name}`);
   };
 
-  const createUrlFile = (e) => {
-    e.preventDefault()
-    if (!title) {
-      setMessage("Please enter title");
-    }
-    if (!audioUrl) {
-      setMessage("Please enter URL");
-    }
-
-    const payload = { audioUrl: audioUrl, title: title, genre: genre };
-
-    setHitsong(payload);
-    console.log("FILEY FILEY==>",hitSong);
-  };
-
+  // Upload handler
   const handleUpload = async () => {
     if (!file) {
       setMessage("❌ Please select a file first");
@@ -126,62 +95,63 @@ const API_URL = 'https://api.maybeart.app:3002';
 
     const formData = new FormData();
     formData.append("audio", file);
-    formData.append("title", title); // Add title field
-    formData.append("genre", genre); // Add genre field if you have it
-    console.log(localStorage.getItem("token"));
-    console.log(formData)
+    formData.append("title", title);
+    formData.append("genre", genre);
 
- 
- 
     try {
       const token = localStorage.getItem("token");
-      console.log("FORMMM++>",formData)
-
       if (!token) {
         setMessage("❌ Please login first");
         setUploading(false);
         return;
       }
-         console.log('FORMBITCH',formData)
 
-          const previewUrl = URL.createObjectURL(audioFile);
-          console.log("PREVIEW",previewurl)
-  setAudioUrl(previewUrl);  // Shows local preview
-
-
-     console.log()
-
-      const response = await axios.post(`${API_URL}/upload`, formData, {
+      const res = await axios.post(`${API_URL}/upload`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
-
           "Content-Type": "multipart/form-data",
         },
       });
-      
 
+      const serverUrl = `${API_URL}/${res.data.audio.url}`;
+      setAudioUrl(serverUrl); // show uploaded file
       setMessage("✅ Upload successful!");
-       setAudioUrl( );
-       console.log("udio===>>>:" ,audioUrl)
-      console.log("Response:", response.data,formData);
-      console.log("Uploaded audio URL:", response.data.audio.url);
 
-        const serverUrl = `https://api.maybeart.app:3002/${response.data.audio.url}`;
-        console.log( "THIS???++++>>>",serverUrl)
-    } catch (error) {
-      setMessage("❌ Upload failed: " + error.message);
+      // Add uploaded track to playlist locally
+      setPlaylist((prev) => [
+        ...prev,
+        res.data.audio, // assuming server returns the audio object
+      ]);
+    } catch (err) {
+      console.error(err);
+      setMessage("❌ Upload failed: " + err.message);
     } finally {
       setUploading(false);
+      setFile(null);
     }
+  };
+
+  // Logout
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
+  // Delete track
+  const destroy = (id) => {
+    const token = localStorage.getItem("token");
+    axios
+      .delete(`${API_URL}/library/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => setPlaylist(playlist.filter((el) => el.id !== id)))
+      .catch((err) => console.error(err));
   };
 
   return (
     <Container className="full-scroll-container">
-      <QuickNav />?{" "}
+      <QuickNav />
       <div className="dash-top">
-        <div>
-  
-        </div>
         <section className="profile-hero">
           <Image
             src={user.photo}
@@ -194,6 +164,9 @@ const API_URL = 'https://api.maybeart.app:3002';
           <h2 onClick={() => navigate("/dashboard")} className="playlist-name">
             {user.username}
           </h2>
+          <Button variant="primary" onClick={logout}>
+            Logout
+          </Button>
         </section>
 
         <div className="bg-overlay" aria-hidden="true"></div>
@@ -201,80 +174,100 @@ const API_URL = 'https://api.maybeart.app:3002';
         <div className="up-sec">
           <h2 className="neon-text">🎵 Audio Upload</h2>
           <section className="sec2">
-            <h2
-              className="playlist-name"
-              onClick={() => navigate("/dashboard")}
-            >
-              {user.username}'s Playlist
-            </h2>
-            <div
-              style={{
-                maxHeight: "500px",
-                overflowY: "auto",
-                marginTop: "20px",
-              }}
-            ></div>
+            <h2 className="playlist-name">{user.username}'s Playlist</h2>
             <input
               type="file"
               accept="audio/*"
               onChange={handleFileChange}
               disabled={uploading}
             />
-          </section>
-
-          
-
-          <section className="sec">
-            <button
+            <Button
               className="cyberpunk-button"
               onClick={handleUpload}
               disabled={!file || uploading}
             >
               {uploading ? "Uploading..." : "Upload Audio"}
-            </button>
+            </Button>
           </section>
-
-          {/* <button 
-        className ='cyberpunk-button'
-          onClick={handleUpload}
-          disabled={!file || uploading}
-        >
-          {uploading ? 'Uploading...' : 'Upload Audio'}
-        </button> */}
         </div>
 
-        <div className="form-sec">
-          <input
-            className="form"
-            type="text"
-            placeholder="Song title *"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-
-          <input
-            className="form"
-            type="text"
-            placeholder="Genre (optional)"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-          />
-          {message && <p className="message">{message}</p>}
-        </div>
- 
         {audioUrl && (
           <div className="player">
-            <h3>Your uploaded audio:</h3>
-            <audio controls src={audioUrl}>
-              Your browser does not support audio playback.
-            </audio>
+            <h3>Playing:</h3>
+            <audio controls src={audioUrl} style={{ width: "100%" }} />
           </div>
         )}
 
-        {/* <section className='mini-section'>
-        <MiniPlaylist />
-      </section> */}
+        {/* Playlist */}
+        <section className="scroll-section mt-4">
+          {playlist.length > 0 ? (
+            playlist.map((el) => {
+              // Determine correct URL
+              const trackUrl =
+                el.filename === "external-url"
+                  ? el.originalName
+                  : `${API_URL}${el.url}`;
+
+              return (
+                <Card
+                  key={el.id}
+                  className="mb-3 bg-transparent border-glow p-3 playlist-card"
+                  onClick={() => setTitle(el.title)}
+                >
+                  <Card.Body className="d-flex justify-content-between align-items-center flex-wrap">
+                    <Card.Title>{el.title}</Card.Title>
+
+                    <Button
+                      className="cyberpunk-button"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setAudioUrl(trackUrl);
+                      }}
+                    >
+                      ▶ Play
+                    </Button>
+
+                    <Button
+                      className="cyberpunk-button"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigator.clipboard.writeText(trackUrl);
+                      }}
+                    >
+                      📋 Copy URL
+                    </Button>
+
+                    <a
+                      href={trackUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ms-2"
+                    >
+                      {trackUrl}
+                    </a>
+                  </Card.Body>
+
+                  <Card.Footer>
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        destroy(el.id);
+                      }}
+                    >
+                      X
+                    </Button>
+                  </Card.Footer>
+                </Card>
+              );
+            })
+          ) : (
+            <p>No tracks yet. Upload some fire 🔥</p>
+          )}
+        </section>
       </div>
     </Container>
   );
