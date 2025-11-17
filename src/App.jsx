@@ -135,7 +135,7 @@ function App() {
 
 
 
-  const lastUpload = playlist[-1];
+  const lastUpload = playlist[playlist.length-1];
   const currentUpload = `${API_URL}/${lastUpload.url}`
   console.log(currentUpload)
 
