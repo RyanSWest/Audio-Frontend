@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./App.css";
 import "./login.css";
 import "./neutral.css";
@@ -117,7 +117,7 @@ function App() {
       console.log("SERV==>",serverUrl)
       setAudioUrl(serverUrl); // show uploaded file
       setMessage("✅ Upload successful!");
-
+ 
       // Add uploaded track to playlist locally
       setPlaylist((prev) => [
         ...prev,
@@ -129,7 +129,7 @@ function App() {
       setMessage("❌ Upload failed: " + err.message);
     } finally {
       setUploading(false);
-      setFile(null);
+      
     }
   };
 
@@ -183,8 +183,12 @@ function App() {
         <div className="up-sec">
           <h2 className="neon-text">🎵 Audio Upload</h2>
           <section className="sec2">
-            <h2 className="playlist-name">{user.username}'s Playlist</h2>
-            <input
+            <Link to = '/dashboard'> 
+                        <h2 className="profile-name">{user.username}'s Playlist</h2>
+
+            
+            </Link>
+             <input
               type="file"
               accept="audio/*"
               onChange={handleFileChange}
@@ -202,15 +206,27 @@ function App() {
         {/* <audio src = {playlist[-1]} */}
 
         {audioUrl && (
+          <div> 
+
+            
+          <span className="playlist-name">{ `${title}`} added to Playlist</span>
+
+
+          <Link to = '/dashboard'>  <span className= 'profile-name'> {`==> ${user.username}`}'s' Playlist {`${playlist.length} tracks`}</span></Link>
           <div className="player">
-            <h3>Playing:</h3>
+            <h3>Playing:{title}</h3>
             <audio controls src={`${audioUrl}`} style={{ width: "100%" }} />
+          </div>
+
+          <span className="playlist-name">New Track added to Playlist</span>
+
+
+          <Link>  <span className= 'playlist-name'>{user.username}'s' Playlist </span></Link>
           </div>
         )}
 
         {/* Playlist */}
-        <section className="scroll-section mt-4">
-          {playlist.length > 0 ? (
+          {/* {playlist.length > 0 ? (
             playlist.map((el) => {
               // Determine correct URL
               const trackUrl =
@@ -277,7 +293,7 @@ function App() {
           ) : (
             <p>No tracks yet. Upload some fire 🔥</p>
           )}
-        </section>
+        </section> */}
       </div>
     </Container>
   );

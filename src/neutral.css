@@ -65,12 +65,45 @@
   max-width: 400px; /* prevents text from overflowing */
 }
 
-.profile-name {
+.profile-info {
   font-family: 'Orbitron', sans-serif; /* futuristic font */
   font-size: 1.8rem;
   margin: 0;
   color: #9b59b6;
   text-shadow: 0 0 6px #9b59b6;
+}
+
+.profile-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  margin: 0;
+  color: #9b59b6;
+  text-shadow: 0 0 6px #9b59b6;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile-name:hover {
+  color: #fff;
+  text-shadow: 
+    0 0 5px #9b59b6,
+    0 0 10px #9b59b6,
+    0 0 20px #9b59b6,
+    0 0 40px #9b59b6,
+    0 0 80px #9b59b6,
+    0 0 90px #9b59b6,
+    0 0 100px #9b59b6,
+    0 0 150px #9b59b6;
+  animation: glitch 0.3s ease-in-out;
+  transform: scale(1.08);
+  letter-spacing: 2px;
+}
+
+@keyframes glitch {
+  0%, 100% { transform: scale(1.08); }
+  25% { transform: scale(1.06) skew(0.5deg); }
+  75% { transform: scale(1.1) skew(-0.5deg); }
 }
 
 .profile-bio {

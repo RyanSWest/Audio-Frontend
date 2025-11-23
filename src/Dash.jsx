@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Image,Navbar, Accordion, Card, Button, Dropdown } from 'react-bootstrap';
 import './neutral.css';
 import QuickNav from './Nav';
@@ -13,12 +13,19 @@ function Dash() {
   const [playlist, setPlaylist] = useState([]);
   const [audioUrl, setAudioUrl] = useState('');
   const [title, setTitle] = useState('');
-  const [currTitle,setCurrTitle]=useState('')
+  const [currTitle,setCurrTitle]=useState('');
+  const [track,setTrack]=useState({})
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // const track = location.state?.track;
+  const trackUrl = location.state?.trackUrl;
+
    
 
 const API_URL = 'https://api.maybeart.app:3002';
-  const navigate = useNavigate()
-
+ 
   
 
   useEffect(() => {
@@ -187,16 +194,62 @@ const API_URL = 'https://api.maybeart.app:3002';
                   ▶ Play
                 </Button>
 
-                <Button
-                  className="cyberpunk-button"
-                  size="sm"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    navigator.clipboard.writeText(trackUrl); // copy correct URL
-                  }}
-                >
-                  📋 Copy URL
-                </Button>
+                <span
+  className="cyberpunk-text"
+  size="sm"
+  onClick={async (e) => {
+    e.stopPropagation();
+
+    // Copy URL
+    await navigator.clipboard.writeText(trackUrl);
+
+    // Navigate with correct data
+    navigate('/distribute', {
+      state: {
+        track: el,
+        trackurl: trackUrl
+      }
+    });
+  }}
+>
+  📋 Copy URL
+</span>
+
+                   <Button
+                    className="cyberpunk-button"
+                    size="sm"
+                    variant="success"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate('/distribute', { 
+                        state: { 
+                          track: el,
+                          trackUrl: trackUrl 
+                        } 
+                      });
+                    }}
+                  >
+                    📄 Release
+                  </Button>
+                  <span className ='profile-name'  
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setTrack(e)
+                      console.log( "THIS==>",track)
+                      navigate('/distribute', { 
+                        state: { 
+                          track: el,
+                          trackUrl: trackUrl 
+                        } 
+                      });
+                    }}
+                  
+                  
+                  
+                  
+                  
+                  > Release</span>
+                  
 
                 <a href={trackUrl} target="_blank" rel="noopener noreferrer">
                   {trackUrl}
